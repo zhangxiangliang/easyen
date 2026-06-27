@@ -75,10 +75,28 @@ The JSON has:
 
 ## What to do with it
 
-- A hard word may have a simpler form (verify → check) — change it — or be a
-  needed term (an api name) — keep it. You decide, based on the reader.
-- A long sentence can be split into shorter ones.
-- Run it again after editing to check the signals got better.
+These are **defaults, not rules**. Adapt them to your project, your reader, and
+your taste — projects differ, and readers know different words. The signals show
+you what to look at; you choose what to change.
+
+**Hard words.** A hard word may have a simpler form (verify → check) — change it.
+Or it may be a needed term (an api name), or a word the reader already knows (a
+reader who learned English for an exam may find `implement` easier than "carry
+out") — then keep it. You decide, based on the reader.
+
+**Long sentences.** Split them: one idea per sentence, about 15–20 words,
+subject then verb then object. Avoid chaining ideas with "which" / "that", and
+avoid stacking nouns ("data migration rollback procedure" → "a plan to undo the
+data change").
+
+**A few habits that help, when they fit:**
+- Keep a technical term, but explain it the first time ("idempotent — safe to
+  run more than once with the same result").
+- Use the same word for the same thing every time (not ticket → task → work item).
+- Drop idioms and slang ("a piece of cake" → "easy").
+- Prefer short paragraphs, lists, and one example after each point.
+
+Then run easyen again to check the signals improved.
 
 ## Notes
 
