@@ -17,6 +17,7 @@ import {
   splitCamelCase,
   splitWords,
 } from "../../src/index";
+import { round2 } from "../../src/round";
 import { SAMPLE_WORDS } from "../fixtures/sample-words";
 
 describe("normalizeApostrophes", () => {
@@ -203,5 +204,21 @@ describe("buildDictionary", () => {
     expect(dict.has("world")).toBe(true);
     expect(dict.has("")).toBe(false);
     expect(dict.size).toBe(2);
+  });
+});
+
+describe("round2", () => {
+  test.each([
+    [1 / 3, 0.33],
+    [2 / 3, 0.67],
+    [0.6888888888888889, 0.69],
+    [8.153846153846153, 8.15],
+    [1, 1],
+    [0, 0],
+    [0.005, 0.01], // rounds up at the halfway point
+    [NaN, 0], // never leaks NaN into output
+    [Infinity, 0],
+  ])("%s -> %s", (value, expected) => {
+    expect(round2(value)).toBe(expected);
   });
 });

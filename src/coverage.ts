@@ -15,6 +15,7 @@ import {
 } from "./classify";
 import { buildDictionary, findInDictionary } from "./dictionary";
 import { getDictionary, DictionaryName } from "./dictionaries";
+import { round2 } from "./round";
 
 /** What you can pass as the dictionary argument. */
 export type DictionarySource =
@@ -59,7 +60,10 @@ export interface CoverageResult {
   total: number;
   /** Number of counted words found in the dictionary. */
   covered: number;
-  /** covered / total, in [0, 1]. Is 0 when there are no counted words. */
+  /**
+   * covered / total, in [0, 1], rounded to two decimals. Is 0 when there are
+   * no counted words. Divide `covered` by `total` for the exact value.
+   */
   ratio: number;
   /** Hard words (not in the dictionary), unique and sorted A–Z. Reword these. */
   hardWords: string[];
@@ -155,7 +159,7 @@ function summarize(results: WordResult[]): CoverageResult {
   return {
     total,
     covered,
-    ratio: total === 0 ? 0 : covered / total,
+    ratio: total === 0 ? 0 : round2(covered / total),
     hardWords: [...counts.keys()].sort(),
     hardWordCounts,
     details: results,

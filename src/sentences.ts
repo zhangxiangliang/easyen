@@ -6,6 +6,7 @@
  * The AI decides whether a long sentence should be broken up.
  */
 import { splitWords } from "./extract";
+import { round2 } from "./round";
 
 /** A sentence that is longer than the limit. */
 export interface LongSentence {
@@ -16,7 +17,10 @@ export interface LongSentence {
 export interface SentenceCheck {
   /** How many sentences were found. */
   sentences: number;
-  /** Average words per sentence (the main number; lower reads easier). */
+  /**
+   * Average words per sentence, rounded to two decimals (the main number;
+   * lower reads easier).
+   */
   wordsPerSentence: number;
   /** Words in the longest sentence. */
   longest: number;
@@ -59,7 +63,7 @@ export function checkSentences(
 
   return {
     sentences,
-    wordsPerSentence: sentences === 0 ? 0 : totalWords / sentences,
+    wordsPerSentence: sentences === 0 ? 0 : round2(totalWords / sentences),
     longest,
     longSentences,
   };

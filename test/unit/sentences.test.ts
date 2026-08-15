@@ -27,6 +27,12 @@ describe("checkSentences", () => {
     expect(r.longSentences.map((s) => s.words)).toEqual([9]);
   });
 
+  test("wordsPerSentence is rounded to two decimals", () => {
+    // 3 sentences of 1, 2 and 4 words -> 7/3 = 2.333...
+    const r = checkSentences("one. two words. one two three four.");
+    expect(r.wordsPerSentence).toBe(2.33);
+  });
+
   test("empty text gives zeroes, not NaN", () => {
     const r = checkSentences("   ");
     expect(r.sentences).toBe(0);

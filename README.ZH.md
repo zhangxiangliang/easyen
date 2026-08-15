@@ -39,7 +39,7 @@ cat draft.md | npx easyen --dict everyday,tech
 {
   "total": 45,
   "covered": 31,
-  "ratio": 0.6888888888888889,
+  "ratio": 0.69,
   "hardWords": [
     "configurable", "facilitates", "leveraging", "methodology",
     "necessitating", "optimizing", "postgres", "practitioners",
@@ -158,11 +158,12 @@ cat draft.md | npx easyen --dict everyday,tech,./our-product-names.txt
 ## 设计取向
 
 * **只量，不评判。** 两个数字、两份清单。没有五十页规则书，不夹带写作口味。
-* **零运行时依赖。** 纯 TypeScript，129 个测试，99% 覆盖率。
+* **零运行时依赖。** 纯 TypeScript，139 个测试，99% 覆盖率。
 * **小而纯的函数。** 每一步都单独导出，你可以自己拼流程。
 
 这一页自己也过了这关：用 `--dict everyday,tech` 量英文版，
-**`ratio` 0.97**、**平均 8.2 词一句**、**没有超过 30 词的句子**。
+**`ratio` 0.97**、**平均 8 词左右一句**、**没有超过 30 词的句子**。
+`SKILL.md` 同样是 0.97。
 
 ## 许可
 

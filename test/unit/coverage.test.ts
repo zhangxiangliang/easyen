@@ -2,6 +2,7 @@
  * End-to-end tests for `checkCoverage`. Each scenario is one data row:
  * { text, options, expected }. Because every step is deterministic, the
  * expected total / covered / ratio / hardWords are exact, not approximate.
+ * `ratio` is reported rounded to two decimals.
  */
 import {
   buildDictionary,
@@ -47,7 +48,7 @@ const scenarios: Scenario[] = [
     expected: {
       total: 3,
       covered: 1,
-      ratio: 1 / 3,
+      ratio: 0.33, // 1/3, rounded to two decimals
       hardWords: ["discovery", "serendipitous"],
     },
   },
@@ -76,7 +77,8 @@ const scenarios: Scenario[] = [
   {
     name: "proper noun stays in hardWords by default",
     text: "I love Shakespeare",
-    expected: { total: 3, covered: 2, ratio: 2 / 3, hardWords: ["shakespeare"] },
+    // 2/3 rounds to 0.67
+    expected: { total: 3, covered: 2, ratio: 0.67, hardWords: ["shakespeare"] },
   },
   {
     name: "proper noun is dropped when ignoreProperNouns is true",

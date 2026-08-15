@@ -39,7 +39,7 @@ cat draft.md | npx easyen --dict everyday,tech
 {
   "total": 45,
   "covered": 31,
-  "ratio": 0.6888888888888889,
+  "ratio": 0.69,
   "hardWords": [
     "configurable", "facilitates", "leveraging", "methodology",
     "necessitating", "optimizing", "postgres", "practitioners",
@@ -157,13 +157,13 @@ cat draft.md | npx easyen --dict everyday,tech,./our-product-names.txt
 
 ## Design
 
-* **Measure, do not judge.** Two numbers and two lists. No 50-page rulebook, no style opinions.
-* **Zero runtime dependencies.** Pure TypeScript. 129 tests, 99% coverage.
+* **Measure, do not judge.** Two numbers and two lists. No 50-page book of rules, no style opinions.
+* **Zero runtime dependencies.** Pure TypeScript. 139 tests, 99% coverage.
 * **Small pure functions.** Every step is exported, so you can build your own pipeline.
 
 This page eats its own dog food. Checked with `--dict everyday,tech`, the text
-above scores **`ratio` 0.97**, **8.2 words per sentence**, and **no sentence over
-30 words**.
+above scores **`ratio` 0.97**, **about 8 words per sentence**, and **no sentence
+over 30 words**. `SKILL.md` scores the same 0.97.
 
 ## License
 
