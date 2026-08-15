@@ -1,0 +1,38 @@
+{
+  "subject": "tablesync — a fictional command-line tool that copies Postgres tables to S3 on a schedule. Used as the subject of every task so the two sets describe the same thing.",
+  "dict": "everyday,tech",
+  "tasks": [
+    {
+      "id": "readme-intro",
+      "prompt": "Write the opening section of the README for tablesync: what it is, what it does, and why someone would use it. About 120 words."
+    },
+    {
+      "id": "error-message",
+      "prompt": "The database password is wrong, so tablesync cannot connect. Write the error message the user sees. Say what happened, why, and what to do."
+    },
+    {
+      "id": "getting-started",
+      "prompt": "Write a getting-started section for tablesync: install it, write a config file, run the first sync. About 120 words."
+    },
+    {
+      "id": "troubleshooting",
+      "prompt": "Write a troubleshooting entry for tablesync: syncs are slower than expected. Cover the likely causes and what to check. About 120 words."
+    },
+    {
+      "id": "release-notes",
+      "prompt": "Write release notes for tablesync 3.0, which changes the config file format. Old config files no longer load. About 120 words."
+    },
+    {
+      "id": "incident-report",
+      "prompt": "Write an incident report: tablesync wrote partial files to S3 for four hours after a network change. About 120 words."
+    },
+    {
+      "id": "runbook",
+      "prompt": "Write a runbook for the on-call engineer: tablesync has stopped syncing and the queue is growing. About 120 words."
+    },
+    {
+      "id": "architecture",
+      "prompt": "Write an architecture overview of tablesync: how it reads from Postgres, batches rows, and writes to S3. About 120 words."
+    }
+  ]
+}

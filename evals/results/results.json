@@ -1,0 +1,184 @@
+{
+  "dict": "everyday,tech",
+  "easyen": "2.0.0",
+  "totals": {
+    "tasks": 8,
+    "wins": 7,
+    "partial": 1,
+    "losses": 0,
+    "baseline": {
+      "ratio": 0.82,
+      "wordsPerSentence": 23.75,
+      "hardWords": 140,
+      "longSentences": 6
+    },
+    "skill": {
+      "ratio": 0.94,
+      "wordsPerSentence": 10.21,
+      "hardWords": 23,
+      "longSentences": 0
+    }
+  },
+  "tasks": [
+    {
+      "id": "readme-intro",
+      "baseline": {
+        "words": 101,
+        "ratio": 0.74,
+        "hardWords": 25,
+        "wordsPerSentence": 25.5,
+        "longest": 30,
+        "longSentences": 0
+      },
+      "skill": {
+        "words": 88,
+        "ratio": 0.98,
+        "hardWords": 2,
+        "wordsPerSentence": 11.38,
+        "longest": 16,
+        "longSentences": 0
+      },
+      "verdict": "win"
+    },
+    {
+      "id": "error-message",
+      "baseline": {
+        "words": 73,
+        "ratio": 0.89,
+        "hardWords": 7,
+        "wordsPerSentence": 24.67,
+        "longest": 32,
+        "longSentences": 1
+      },
+      "skill": {
+        "words": 26,
+        "ratio": 0.81,
+        "hardWords": 4,
+        "wordsPerSentence": 9.33,
+        "longest": 12,
+        "longSentences": 0
+      },
+      "verdict": "partial"
+    },
+    {
+      "id": "getting-started",
+      "baseline": {
+        "words": 109,
+        "ratio": 0.84,
+        "hardWords": 16,
+        "wordsPerSentence": 21.8,
+        "longest": 28,
+        "longSentences": 0
+      },
+      "skill": {
+        "words": 75,
+        "ratio": 0.97,
+        "hardWords": 1,
+        "wordsPerSentence": 7.7,
+        "longest": 15,
+        "longSentences": 0
+      },
+      "verdict": "win"
+    },
+    {
+      "id": "troubleshooting",
+      "baseline": {
+        "words": 108,
+        "ratio": 0.83,
+        "hardWords": 17,
+        "wordsPerSentence": 22.2,
+        "longest": 31,
+        "longSentences": 1
+      },
+      "skill": {
+        "words": 89,
+        "ratio": 0.98,
+        "hardWords": 2,
+        "wordsPerSentence": 10.22,
+        "longest": 15,
+        "longSentences": 0
+      },
+      "verdict": "win"
+    },
+    {
+      "id": "release-notes",
+      "baseline": {
+        "words": 97,
+        "ratio": 0.81,
+        "hardWords": 18,
+        "wordsPerSentence": 24.25,
+        "longest": 30,
+        "longSentences": 0
+      },
+      "skill": {
+        "words": 78,
+        "ratio": 0.92,
+        "hardWords": 5,
+        "wordsPerSentence": 10,
+        "longest": 19,
+        "longSentences": 0
+      },
+      "verdict": "win"
+    },
+    {
+      "id": "incident-report",
+      "baseline": {
+        "words": 101,
+        "ratio": 0.79,
+        "hardWords": 19,
+        "wordsPerSentence": 21.6,
+        "longest": 36,
+        "longSentences": 1
+      },
+      "skill": {
+        "words": 92,
+        "ratio": 0.91,
+        "hardWords": 6,
+        "wordsPerSentence": 12.63,
+        "longest": 21,
+        "longSentences": 0
+      },
+      "verdict": "win"
+    },
+    {
+      "id": "runbook",
+      "baseline": {
+        "words": 106,
+        "ratio": 0.86,
+        "hardWords": 14,
+        "wordsPerSentence": 27,
+        "longest": 35,
+        "longSentences": 2
+      },
+      "skill": {
+        "words": 91,
+        "ratio": 0.98,
+        "hardWords": 2,
+        "wordsPerSentence": 8.45,
+        "longest": 16,
+        "longSentences": 0
+      },
+      "verdict": "win"
+    },
+    {
+      "id": "architecture",
+      "baseline": {
+        "words": 113,
+        "ratio": 0.79,
+        "hardWords": 24,
+        "wordsPerSentence": 23,
+        "longest": 35,
+        "longSentences": 1
+      },
+      "skill": {
+        "words": 105,
+        "ratio": 0.99,
+        "hardWords": 1,
+        "wordsPerSentence": 12,
+        "longest": 17,
+        "longSentences": 0
+      },
+      "verdict": "win"
+    }
+  ]
+}

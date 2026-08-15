@@ -49,7 +49,7 @@ export default tseslint.config(
     },
   },
   {
-    files: ["*.mjs", "scripts/**/*.mjs"],
+    files: ["*.mjs", "scripts/**/*.mjs", "evals/**/*.mjs"],
     languageOptions: {
       globals: globals.node,
       sourceType: "module",
