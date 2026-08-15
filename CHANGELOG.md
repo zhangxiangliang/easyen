@@ -1,3 +1,11 @@
+## [2.0.1](https://github.com/zhangxiangliang/easyen/compare/v2.0.0...v2.0.1) (2026-08-15)
+
+
+### Bug Fixes
+
+* add words that any software text needs ([05e32b1](https://github.com/zhangxiangliang/easyen/commit/05e32b16d58e977bbfe48e541b461c891448de1a))
+* look a word up whole before splitting it ([72d472a](https://github.com/zhangxiangliang/easyen/commit/72d472adf593ff237cabf3124ecf48cfd0eca5c8))
+
 # [2.0.0](https://github.com/zhangxiangliang/easyen/compare/v1.2.1...v2.0.0) (2026-08-15)
 
 
