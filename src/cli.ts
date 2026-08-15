@@ -17,6 +17,7 @@ import {
   checkSentences,
   listDictionaries,
   combineDictionaries,
+  stripMarkdown,
   CheckOptions,
   DictionarySource,
 } from "./index";
@@ -24,12 +25,18 @@ import {
 interface CliArgs {
   dict: string;
   file?: string;
+  markdown: boolean;
   options: CheckOptions;
   help: boolean;
 }
 
 function parseArgs(argv: string[]): CliArgs {
-  const args: CliArgs = { dict: "everyday", options: {}, help: false };
+  const args: CliArgs = {
+    dict: "everyday",
+    options: {},
+    markdown: false,
+    help: false,
+  };
 
   for (let i = 0; i < argv.length; i += 1) {
     switch (argv[i]) {
@@ -44,6 +51,10 @@ function parseArgs(argv: string[]): CliArgs {
       case "-f":
       case "--file":
         args.file = argv[++i];
+        break;
+      case "-m":
+      case "--markdown": // drop code, links and markup before counting
+        args.markdown = true;
         break;
       case "--proper-nouns": // ignore likely proper nouns
         args.options.ignoreProperNouns = true;
@@ -72,6 +83,9 @@ Options:
                       combine: each item is a built-in name OR a path to a
                       word-list file. e.g.  --dict everyday,tech,./terms.txt
   -f, --file <path>   Read the text from a file instead of stdin
+  -m, --markdown      Treat the input as Markdown: drop code blocks, inline
+                      code, URLs and HTML before counting. Use this for a
+                      README, or badges and file paths count as hard words.
   --proper-nouns      Ignore capitalised unknown words (names, places)
   --count-numbers     Count numbers instead of ignoring them
   -h, --help          Show this help
@@ -105,12 +119,13 @@ function main(): void {
   }
 
   try {
-    const text = args.file ? readFileSync(args.file, "utf8") : readStdin();
-    if (!text.trim()) {
+    const raw = args.file ? readFileSync(args.file, "utf8") : readStdin();
+    if (!raw.trim()) {
       console.error("No text given. Pipe text in, or use --file <path>.");
       process.exitCode = 1;
       return;
     }
+    const text = args.markdown ? stripMarkdown(raw) : raw;
     const result = checkCoverage(text, resolveDictSpec(args.dict), args.options);
     const sentences = checkSentences(text);
     console.log(JSON.stringify({ ...result, sentences }, null, 2));

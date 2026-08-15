@@ -92,6 +92,7 @@ npx easyen --file draft.md                   # 任何系统，不用管道
 |---|---|
 | `-d, --dict <spec>` | 用哪个词表（默认 `everyday`）。逗号分隔可以叠加，每一项可以是内置名字，**也可以是你自己的词表文件路径**：`--dict everyday,tech,./terms.txt` |
 | `-f, --file <path>` | 从文件读，不走 stdin |
+| `-m, --markdown` | 按 Markdown 处理：先去掉代码块、行内代码、URL 和 HTML。**量 README 一定要加这个**——不加的话，badge 和文件路径会被当成生词。 |
 | `--proper-nouns` | 忽略大写开头的生词（人名、地名） |
 | `--count-numbers` | 把数字也算进去（默认不算） |
 | `-h, --help` | 看帮助 |
@@ -103,7 +104,9 @@ npm install easyen
 ```
 
 ```ts
-import { checkCoverage, checkSentences } from "easyen";
+import { checkCoverage, checkSentences, stripMarkdown } from "easyen";
+
+const text = stripMarkdown(readme); // Markdown 进，纯文字出
 
 const result = checkCoverage(text, "everyday");
 if (result.ratio < 0.95) {
@@ -122,8 +125,8 @@ console.log(flow.wordsPerSentence, flow.longSentences);
 
 | 名字 | 词量 | 装了什么 |
 |---|---|---|
-| `everyday` | 2801 | 日常高频词。底座，单独用就是最简单的级别。 |
-| `academic` | 963 | 学术词。`--dict everyday,academic` |
+| `everyday` | 2803 | 日常高频词。底座，单独用就是最简单的级别。 |
+| `academic` | 962 | 学术词。`--dict everyday,academic` |
 | `tech` | 243 | 软件词：api、deploy、schema…… `--dict everyday,tech` |
 | `frameworks` | 803 | 工具和库名：vue、vite、docker…… `--dict everyday,tech,frameworks` |
 
@@ -153,17 +156,23 @@ cat draft.md | npx easyen --dict everyday,tech,./our-product-names.txt
 * **不改你的文字。** 它只指出来，改不改你（或者 AI）说了算——有些难词，你的读者本来就认识。
 * **不是语法或拼写检查。** 那个请用专门的工具。
 * **不认识你的读者。** `ratio` 是个信号，不是分数线，没有必须达到的数字。
-* **看不懂代码。** 先把代码块和链接去掉，不然会被当成生词。
+* **看不懂代码。** Markdown 用 `--markdown` 就行；其他格式要自己先去掉代码和链接。
 
 ## 设计取向
 
 * **只量，不评判。** 两个数字、两份清单。没有五十页规则书，不夹带写作口味。
-* **零运行时依赖。** 纯 TypeScript，139 个测试，99% 覆盖率。
+* **零运行时依赖。** 纯 TypeScript，179 个测试，99% 覆盖率。
 * **小而纯的函数。** 每一步都单独导出，你可以自己拼流程。
 
-这一页自己也过了这关：用 `--dict everyday,tech` 量英文版，
-**`ratio` 0.97**、**平均 8 词左右一句**、**没有超过 30 词的句子**。
-`SKILL.md` 同样是 0.97。
+这一页自己也过了这关，你可以自己跑一遍：
+
+```bash
+npx easyen --file README.md --dict everyday,tech --markdown
+```
+
+英文版 **`ratio` 0.94**，平均 7 词左右一句。唯一那句超过 30 词的，
+就是开头引用的那段 AI 原文——故意留着的，因为这一页讲的就是它。
+`SKILL.md` 没有这种示例，是 0.96，一个长句都没有。
 
 ## 许可
 

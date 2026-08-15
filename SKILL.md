@@ -39,8 +39,13 @@ If piping is hard on your system, read a file directly instead:
 npx easyen --file your-doc.md --dict everyday,tech
 ```
 
-You can also compose with other tools — e.g. strip code first so it does not
-count as hard words: `<remove code> | npx easyen --dict everyday,tech`.
+**For Markdown (a README, docs, a skill file), add `--markdown`.** Without it,
+code blocks, URLs and HTML count as words, and the result is mostly noise —
+on this project's own README that alone moved the ratio from 0.94 to 0.83.
+
+```bash
+npx easyen --file README.md --dict everyday,tech --markdown
+```
 
 ### Choose a word list by reader
 
@@ -100,7 +105,7 @@ Then run easyen again to check the signals improved.
 
 ## Notes
 
-- Remove code and links from the text before you check it, so code does not
-  count as hard words.
+- Use `--markdown` on any Markdown file. For other formats, strip the code and
+  links yourself first, so they do not count as hard words.
 - Keep the word list small — that is the point: a small list marks more words to
   make simpler. Do not reach for a bigger list just to raise the score.

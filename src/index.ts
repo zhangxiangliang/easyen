@@ -42,6 +42,9 @@ export {
 } from "./dictionaries";
 export type { DictionaryName } from "./dictionaries";
 
+// Input cleaning: Markdown in, prose out
+export { stripMarkdown } from "./markdown";
+
 // Individual steps (composable / testable on their own)
 export { pipe } from "./pipe";
 export { normalizeApostrophes, expandContractions } from "./normalize";

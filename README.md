@@ -92,6 +92,7 @@ npx easyen --file draft.md                   # any OS, no pipe
 |---|---|
 | `-d, --dict <spec>` | Word list to use (default: `everyday`). Comma-separated to combine. Each item is a built-in name **or** a path to your own word file: `--dict everyday,tech,./terms.txt` |
 | `-f, --file <path>` | Read the text from a file instead of stdin |
+| `-m, --markdown` | Treat the input as Markdown: drop code blocks, inline code, URLs and HTML first. **Use this on a README** — without it, badges and file paths count as hard words. |
 | `--proper-nouns` | Ignore unknown words that start with a capital (names, places) |
 | `--count-numbers` | Count numbers instead of ignoring them |
 | `-h, --help` | Show help |
@@ -103,7 +104,9 @@ npm install easyen
 ```
 
 ```ts
-import { checkCoverage, checkSentences } from "easyen";
+import { checkCoverage, checkSentences, stripMarkdown } from "easyen";
+
+const text = stripMarkdown(readme); // Markdown in, prose out
 
 const result = checkCoverage(text, "everyday");
 if (result.ratio < 0.95) {
@@ -122,8 +125,8 @@ Useful in CI — fail the build when your docs get too hard to read.
 
 | Name | Words | What is in it |
 |---|---|---|
-| `everyday` | 2801 | Common English. The base — use it alone for the simplest level. |
-| `academic` | 963 | Academic words. `--dict everyday,academic` |
+| `everyday` | 2803 | Common English. The base — use it alone for the simplest level. |
+| `academic` | 962 | Academic words. `--dict everyday,academic` |
 | `tech` | 243 | Software words: api, deploy, schema … `--dict everyday,tech` |
 | `frameworks` | 803 | Tool and library names: vue, vite, docker … `--dict everyday,tech,frameworks` |
 
@@ -153,17 +156,24 @@ cat draft.md | npx easyen --dict everyday,tech,./our-product-names.txt
 * **It does not rewrite your text.** It points; you (or your AI) choose. A hard word may be one the reader already knows.
 * **It is not a grammar or spell checker.** Use a real one for that.
 * **It does not know your reader.** `ratio` is a signal, not a grade. There is no score you must hit.
-* **It does not read code.** Strip code blocks and links first, or they count as hard words.
+* **It does not read code.** Markdown is handled by `--markdown`; for other formats, strip the code and links yourself first.
 
 ## Design
 
 * **Measure, do not judge.** Two numbers and two lists. No 50-page book of rules, no style opinions.
-* **Zero runtime dependencies.** Pure TypeScript. 139 tests, 99% coverage.
+* **Zero runtime dependencies.** Pure TypeScript. 179 tests, 99% coverage.
 * **Small pure functions.** Every step is exported, so you can build your own pipeline.
 
-This page eats its own dog food. Checked with `--dict everyday,tech`, the text
-above scores **`ratio` 0.97**, **about 8 words per sentence**, and **no sentence
-over 30 words**. `SKILL.md` scores the same 0.97.
+This page eats its own dog food. Check it yourself:
+
+```bash
+npx easyen --file README.md --dict everyday,tech --markdown
+```
+
+It scores **`ratio` 0.94** at about 7 words per sentence. The one sentence over
+30 words is the AI paragraph quoted at the top — kept on purpose, since that is
+the thing this page is about. `SKILL.md`, which has no such example, scores 0.96
+with no long sentence at all.
 
 ## License
 
