@@ -18,6 +18,8 @@ interface Scenario {
   name: string;
   text: string;
   options?: CheckOptions;
+  /** Overrides the shared sample dictionary for this one case. */
+  dictionary?: readonly string[];
   expected: Pick<CoverageResult, "total" | "covered" | "ratio" | "hardWords">;
 }
 
@@ -87,6 +89,19 @@ const scenarios: Scenario[] = [
     expected: { total: 2, covered: 2, ratio: 1, hardWords: [] },
   },
   {
+    // "PostgreSQL" is a word; "Postgre" is not. Look the token up whole first.
+    name: "a camelCase word the dictionary knows stays whole",
+    text: "I read the BookList",
+    dictionary: [...SAMPLE_WORDS, "booklist"],
+    expected: { total: 4, covered: 4, ratio: 1, hardWords: [] },
+  },
+  {
+    name: "a camelCase word the dictionary does not know is still split",
+    text: "I read the BookList",
+    // book is known, list is not — proof the split still happens
+    expected: { total: 5, covered: 4, ratio: 0.8, hardWords: ["list"] },
+  },
+  {
     name: "empty text gives ratio 0, not NaN",
     text: "   ...  ",
     expected: { total: 0, covered: 0, ratio: 0, hardWords: [] },
@@ -94,8 +109,8 @@ const scenarios: Scenario[] = [
 ];
 
 describe("checkCoverage", () => {
-  test.each(scenarios)("$name", ({ text, options, expected }) => {
-    expect(checkCoverage(text, dict, options)).toMatchObject(expected);
+  test.each(scenarios)("$name", ({ text, options, dictionary, expected }) => {
+    expect(checkCoverage(text, dictionary ?? dict, options)).toMatchObject(expected);
   });
 
   test("accepts a raw word list as well as a prebuilt Set", () => {

@@ -76,6 +76,19 @@ export interface CoverageResult {
 /** Clean raw text into a space-separated, contraction-free string. */
 const prepare = pipe<string>(normalizeApostrophes, expandContractions);
 
+/**
+ * Split a camelCase token, unless the dictionary already knows it whole.
+ *
+ * "PostgreSQL" is a word in the frameworks list, but splitting it first turns
+ * it into "Postgre" and "SQL", and "postgre" is a word in no language. So the
+ * token is looked up as it stands, and only taken apart when that misses —
+ * which is what makes getUserById become get / User / By / Id.
+ */
+function splitUnlessKnown(token: string, dict: ReadonlySet<string>): string[] {
+  if (findInDictionary(token.toLowerCase(), dict) !== null) return [token];
+  return splitCamelCase(token);
+}
+
 /** Turn one extracted token into a WordResult, or null if it is filtered out. */
 function classifyToken(
   token: string,
@@ -186,7 +199,7 @@ export function checkCoverage(
   const dict = resolveDictionary(dictionary);
 
   const results = splitWords(prepare(text))
-    .flatMap(splitCamelCase) // getUserById -> get / User / By / Id
+    .flatMap((token) => splitUnlessKnown(token, dict)) // getUserById -> get / User / By / Id
     .map((token) => classifyToken(token, dict, settings))
     .filter((result): result is WordResult => result !== null);
 
