@@ -1,3 +1,15 @@
+# [1.2.0](https://github.com/zhangxiangliang/easyen/compare/v1.1.0...v1.2.0) (2026-08-15)
+
+
+### Bug Fixes
+
+* recognise cannot, un- words, skip and readable ([49a324d](https://github.com/zhangxiangliang/easyen/commit/49a324d9eb783b4626ab98b565488b2810ce0c5c))
+
+
+### Features
+
+* add --markdown to strip code, links and markup before counting ([b39c7ed](https://github.com/zhangxiangliang/easyen/commit/b39c7ed43c72486192643f3e124e076d9832eb55))
+
 # [1.1.0](https://github.com/zhangxiangliang/easyen/compare/v1.0.0...v1.1.0) (2026-08-15)
 
 
