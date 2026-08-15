@@ -23,6 +23,64 @@ easyen checks two things in the AI's English, and reminds it to keep things simp
 
 It only measures; it changes nothing. It shows you the hard words and the long sentences clearly. Whether to change them, and how — the AI decides.
 
+## Quick start
+
+### With your AI
+
+```bash
+npx skills add zhangxiangliang/easyen
+```
+
+That installs the skill into Claude Code, Cursor, Codex and other agents. From
+then on the AI runs easyen on its own drafts and cleans them up before you see
+them.
+
+No CLI? Hand your AI this line instead, and it does the rest:
+
+> Read and follow https://github.com/zhangxiangliang/easyen/blob/main/SKILL.md
+
+### On the command line
+
+No install needed. `npx` gets the package on first run.
+
+```bash
+cat draft.md | npx easyen                    # macOS / Linux
+Get-Content draft.md | npx easyen            # Windows PowerShell
+npx easyen --file draft.md                   # any OS, no pipe
+```
+
+| Option | What it does |
+|---|---|
+| `-d, --dict <spec>` | Word list to use (default: `everyday`). Comma-separated to combine. Each item is a built-in name **or** a path to your own word file: `--dict everyday,tech,./terms.txt` |
+| `-f, --file <path>` | Read the text from a file instead of stdin |
+| `-m, --markdown` | Treat the input as Markdown: drop code blocks, inline code, URLs and HTML first. **Use this on a README** — without it, badges and file paths count as hard words. |
+| `--details` | Add a row per word (base form, known or not). Off by default — see below |
+| `--proper-nouns` | Ignore unknown words that start with a capital (names, places) |
+| `--count-numbers` | Count numbers instead of ignoring them |
+| `-h, --help` | Show help |
+
+### In your code
+
+```bash
+npm install easyen
+```
+
+```ts
+import { checkCoverage, checkSentences, stripMarkdown } from "easyen";
+
+const text = stripMarkdown(readme); // Markdown in, prose out
+
+const result = checkCoverage(text, "everyday");
+if (result.ratio < 0.95) {
+  console.log("too hard:", result.hardWords);
+}
+
+const flow = checkSentences(text, { longSentenceWords: 25 });
+console.log(flow.wordsPerSentence, flow.longSentences);
+```
+
+Useful in CI — fail the build when your docs get too hard to read.
+
 ## See it work
 
 Here is a paragraph an AI wrote:
@@ -67,58 +125,6 @@ Now the AI knows what to fix. Here is the same idea, written for a reader:
 | Longest sentence | 35 | **9** |
 
 Same meaning. Half the words. Anyone can read it.
-
-## Quick start
-
-### With your AI
-
-Hand this one line to your AI (Claude Code, Cursor, Codex …), and it does the rest:
-
-> Read and follow https://github.com/zhangxiangliang/easyen/blob/main/SKILL.md
-
-The AI then runs easyen on its own drafts and cleans them up before you see them.
-
-### On the command line
-
-No install needed. `npx` gets the package on first run.
-
-```bash
-cat draft.md | npx easyen                    # macOS / Linux
-Get-Content draft.md | npx easyen            # Windows PowerShell
-npx easyen --file draft.md                   # any OS, no pipe
-```
-
-| Option | What it does |
-|---|---|
-| `-d, --dict <spec>` | Word list to use (default: `everyday`). Comma-separated to combine. Each item is a built-in name **or** a path to your own word file: `--dict everyday,tech,./terms.txt` |
-| `-f, --file <path>` | Read the text from a file instead of stdin |
-| `-m, --markdown` | Treat the input as Markdown: drop code blocks, inline code, URLs and HTML first. **Use this on a README** — without it, badges and file paths count as hard words. |
-| `--details` | Add a row per word (base form, known or not). Off by default — see below |
-| `--proper-nouns` | Ignore unknown words that start with a capital (names, places) |
-| `--count-numbers` | Count numbers instead of ignoring them |
-| `-h, --help` | Show help |
-
-### In your code
-
-```bash
-npm install easyen
-```
-
-```ts
-import { checkCoverage, checkSentences, stripMarkdown } from "easyen";
-
-const text = stripMarkdown(readme); // Markdown in, prose out
-
-const result = checkCoverage(text, "everyday");
-if (result.ratio < 0.95) {
-  console.log("too hard:", result.hardWords);
-}
-
-const flow = checkSentences(text, { longSentenceWords: 25 });
-console.log(flow.wordsPerSentence, flow.longSentences);
-```
-
-Useful in CI — fail the build when your docs get too hard to read.
 
 ## Word lists
 

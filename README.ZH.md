@@ -23,6 +23,63 @@ easyen 就帮 AI 量两件事，提醒它把话说简单点：
 
 它只量、不改。哪些词偏难、哪些句子绕，给你标得清清楚楚；至于换不换、怎么换，AI 自己拿主意。
 
+## 快速开始
+
+### 交给你的 AI
+
+```bash
+npx skills add zhangxiangliang/easyen
+```
+
+这会把 skill 装进 Claude Code、Cursor、Codex 等工具。之后 AI 会自己拿 easyen
+量自己写的英文，改干净了再拿给你看。
+
+不想装 CLI？把下面这句话丢给你的 AI，剩下的它自己搞定：
+
+> Read and follow https://github.com/zhangxiangliang/easyen/blob/main/SKILL.md
+
+### 命令行
+
+不用装，`npx` 第一次运行会自动拉包。
+
+```bash
+cat draft.md | npx easyen                    # macOS / Linux
+Get-Content draft.md | npx easyen            # Windows PowerShell
+npx easyen --file draft.md                   # 任何系统，不用管道
+```
+
+| 参数 | 作用 |
+|---|---|
+| `-d, --dict <spec>` | 用哪个词表（默认 `everyday`）。逗号分隔可以叠加，每一项可以是内置名字，**也可以是你自己的词表文件路径**：`--dict everyday,tech,./terms.txt` |
+| `-f, --file <path>` | 从文件读，不走 stdin |
+| `-m, --markdown` | 按 Markdown 处理：先去掉代码块、行内代码、URL 和 HTML。**量 README 一定要加这个**——不加的话，badge 和文件路径会被当成生词。 |
+| `--details` | 每个词一行明细（原形、是否认识）。默认关闭，原因见下 |
+| `--proper-nouns` | 忽略大写开头的生词（人名、地名） |
+| `--count-numbers` | 把数字也算进去（默认不算） |
+| `-h, --help` | 看帮助 |
+
+### 在代码里用
+
+```bash
+npm install easyen
+```
+
+```ts
+import { checkCoverage, checkSentences, stripMarkdown } from "easyen";
+
+const text = stripMarkdown(readme); // Markdown 进，纯文字出
+
+const result = checkCoverage(text, "everyday");
+if (result.ratio < 0.95) {
+  console.log("太难了：", result.hardWords);
+}
+
+const flow = checkSentences(text, { longSentenceWords: 25 });
+console.log(flow.wordsPerSentence, flow.longSentences);
+```
+
+可以接进 CI —— 文档变难就让构建失败。
+
 ## 看一眼效果
 
 这是 AI 写的一段话：
@@ -67,58 +124,6 @@ AI 拿到这份清单，就知道该动哪里了。同样的意思，写成人�
 | 最长句子 | 35 词 | **9 词** |
 
 意思一样，词少一半，谁都读得懂。
-
-## 快速开始
-
-### 交给你的 AI
-
-把下面这句话丢给你的 AI（Claude Code、Cursor、Codex 都行），剩下的它自己搞定：
-
-> Read and follow https://github.com/zhangxiangliang/easyen/blob/main/SKILL.md
-
-之后 AI 会自己拿 easyen 量自己写的英文，改干净了再拿给你看。
-
-### 命令行
-
-不用装，`npx` 第一次运行会自动拉包。
-
-```bash
-cat draft.md | npx easyen                    # macOS / Linux
-Get-Content draft.md | npx easyen            # Windows PowerShell
-npx easyen --file draft.md                   # 任何系统，不用管道
-```
-
-| 参数 | 作用 |
-|---|---|
-| `-d, --dict <spec>` | 用哪个词表（默认 `everyday`）。逗号分隔可以叠加，每一项可以是内置名字，**也可以是你自己的词表文件路径**：`--dict everyday,tech,./terms.txt` |
-| `-f, --file <path>` | 从文件读，不走 stdin |
-| `-m, --markdown` | 按 Markdown 处理：先去掉代码块、行内代码、URL 和 HTML。**量 README 一定要加这个**——不加的话，badge 和文件路径会被当成生词。 |
-| `--details` | 每个词一行明细（原形、是否认识）。默认关闭，原因见下 |
-| `--proper-nouns` | 忽略大写开头的生词（人名、地名） |
-| `--count-numbers` | 把数字也算进去（默认不算） |
-| `-h, --help` | 看帮助 |
-
-### 在代码里用
-
-```bash
-npm install easyen
-```
-
-```ts
-import { checkCoverage, checkSentences, stripMarkdown } from "easyen";
-
-const text = stripMarkdown(readme); // Markdown 进，纯文字出
-
-const result = checkCoverage(text, "everyday");
-if (result.ratio < 0.95) {
-  console.log("太难了：", result.hardWords);
-}
-
-const flow = checkSentences(text, { longSentenceWords: 25 });
-console.log(flow.wordsPerSentence, flow.longSentences);
-```
-
-可以接进 CI —— 文档变难就让构建失败。
 
 ## 词表
 
