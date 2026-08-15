@@ -1,6 +1,6 @@
 ---
-name: easyen
-description: Check how easy an English text is to read — its word level and its sentence length. Use it when writing or checking English that should stay simple (for learners), to find hard words to change and long sentences to break up, or to keep your own English at a chosen level.
+name: easy-english
+description: Check how easy an English text is to read, and make it simpler. Measures vocabulary level and sentence length with the easyen CLI, then points at the exact hard words to reword and long sentences to break up. Use it when writing or reviewing English that should stay plain — docs, a README, error messages, release notes — or to hold your own writing at a chosen reading level.
 ---
 
 # easyen
