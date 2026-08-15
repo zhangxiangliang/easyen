@@ -1,3 +1,22 @@
+# [2.0.0](https://github.com/zhangxiangliang/easyen/compare/v1.2.1...v2.0.0) (2026-08-15)
+
+
+* feat!: hide details from CLI output unless --details is given ([747a716](https://github.com/zhangxiangliang/easyen/commit/747a716d048a46fee740880ddc205b2f7e144db5))
+
+
+### BREAKING CHANGES
+
+* the CLI no longer prints the `details` array by
+default. Pass --details to get it back.
+
+On a 420-word README those rows were 96% of the output — about
+16,000 tokens instead of 700 — and this tool is mostly read by an
+AI that pays for every one of them. Nothing actionable was lost:
+hardWords and hardWordCounts already carry it.
+
+The library is unchanged. checkCoverage() still returns details,
+which costs nothing in memory; only the CLI leaves it out.
+
 ## [1.2.1](https://github.com/zhangxiangliang/easyen/compare/v1.2.0...v1.2.1) (2026-08-15)
 
 
