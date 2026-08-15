@@ -126,9 +126,9 @@ Useful in CI — fail the build when your docs get too hard to read.
 
 | Name | Words | What is in it |
 |---|---|---|
-| `everyday` | 2803 | Common English. The base — use it alone for the simplest level. |
+| `everyday` | 2811 | Common English. The base — use it alone for the simplest level. |
 | `academic` | 962 | Academic words. `--dict everyday,academic` |
-| `tech` | 244 | Software words: api, deploy, schema … `--dict everyday,tech` |
+| `tech` | 255 | Software words: api, deploy, schema … `--dict everyday,tech` |
 | `frameworks` | 803 | Tool and library names: vue, vite, docker … `--dict everyday,tech,frameworks` |
 
 Pick only what your reader needs. **A smaller list marks more words to fix** — that is the point. Do not reach for a bigger list just to raise the score.

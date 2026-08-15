@@ -126,9 +126,9 @@ console.log(flow.wordsPerSentence, flow.longSentences);
 
 | 名字 | 词量 | 装了什么 |
 |---|---|---|
-| `everyday` | 2803 | 日常高频词。底座，单独用就是最简单的级别。 |
+| `everyday` | 2811 | 日常高频词。底座，单独用就是最简单的级别。 |
 | `academic` | 962 | 学术词。`--dict everyday,academic` |
-| `tech` | 244 | 软件词：api、deploy、schema…… `--dict everyday,tech` |
+| `tech` | 255 | 软件词：api、deploy、schema…… `--dict everyday,tech` |
 | `frameworks` | 803 | 工具和库名：vue、vite、docker…… `--dict everyday,tech,frameworks` |
 
 按读者选，够用就行。**词表越小，标出来要改的词越多**——这正是它的用意。别为了让分数好看就换个大词表。

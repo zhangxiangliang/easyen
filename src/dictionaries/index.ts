@@ -15,11 +15,11 @@ import TECH_WORDS from "./tech.json";
 import FRAMEWORK_WORDS from "./frameworks.json";
 
 export const BUILTIN_DICTIONARIES = {
-  /** Base: 2803 everyday high-frequency words (includes function words like the/and). */
+  /** Base: 2811 everyday high-frequency words (includes function words like the/and). */
   everyday: EVERYDAY_WORDS as readonly string[],
   /** Add-on: 962 academic words. Combine with everyday. */
   academic: ACADEMIC_WORDS as readonly string[],
-  /** Add-on: 244 common software / technical-writing terms (api, deploy, schema ...). */
+  /** Add-on: 255 common software / technical-writing terms (api, deploy, schema ...). */
   tech: TECH_WORDS as readonly string[],
   /** Add-on: framework / library / tool names (vue, vite, webpack, docker ...). */
   frameworks: FRAMEWORK_WORDS as readonly string[],

@@ -7,15 +7,15 @@
     "partial": 1,
     "losses": 0,
     "baseline": {
-      "ratio": 0.82,
+      "ratio": 0.84,
       "wordsPerSentence": 23.75,
-      "hardWords": 140,
+      "hardWords": 129,
       "longSentences": 6
     },
     "skill": {
-      "ratio": 0.94,
+      "ratio": 0.97,
       "wordsPerSentence": 10.21,
-      "hardWords": 23,
+      "hardWords": 11,
       "longSentences": 0
     }
   },
@@ -43,17 +43,17 @@
     {
       "id": "error-message",
       "baseline": {
-        "words": 73,
-        "ratio": 0.89,
-        "hardWords": 7,
+        "words": 74,
+        "ratio": 0.93,
+        "hardWords": 5,
         "wordsPerSentence": 24.67,
         "longest": 32,
         "longSentences": 1
       },
       "skill": {
-        "words": 26,
-        "ratio": 0.81,
-        "hardWords": 4,
+        "words": 27,
+        "ratio": 0.89,
+        "hardWords": 3,
         "wordsPerSentence": 9.33,
         "longest": 12,
         "longSentences": 0
@@ -92,8 +92,8 @@
       },
       "skill": {
         "words": 89,
-        "ratio": 0.98,
-        "hardWords": 2,
+        "ratio": 1,
+        "hardWords": 0,
         "wordsPerSentence": 10.22,
         "longest": 15,
         "longSentences": 0
@@ -104,16 +104,16 @@
       "id": "release-notes",
       "baseline": {
         "words": 97,
-        "ratio": 0.81,
-        "hardWords": 18,
+        "ratio": 0.84,
+        "hardWords": 16,
         "wordsPerSentence": 24.25,
         "longest": 30,
         "longSentences": 0
       },
       "skill": {
         "words": 78,
-        "ratio": 0.92,
-        "hardWords": 5,
+        "ratio": 0.96,
+        "hardWords": 2,
         "wordsPerSentence": 10,
         "longest": 19,
         "longSentences": 0
@@ -124,16 +124,16 @@
       "id": "incident-report",
       "baseline": {
         "words": 101,
-        "ratio": 0.79,
-        "hardWords": 19,
+        "ratio": 0.83,
+        "hardWords": 16,
         "wordsPerSentence": 21.6,
         "longest": 36,
         "longSentences": 1
       },
       "skill": {
         "words": 92,
-        "ratio": 0.91,
-        "hardWords": 6,
+        "ratio": 0.96,
+        "hardWords": 2,
         "wordsPerSentence": 12.63,
         "longest": 21,
         "longSentences": 0
@@ -144,16 +144,16 @@
       "id": "runbook",
       "baseline": {
         "words": 106,
-        "ratio": 0.86,
-        "hardWords": 14,
+        "ratio": 0.89,
+        "hardWords": 11,
         "wordsPerSentence": 27,
         "longest": 35,
         "longSentences": 2
       },
       "skill": {
         "words": 91,
-        "ratio": 0.98,
-        "hardWords": 2,
+        "ratio": 1,
+        "hardWords": 0,
         "wordsPerSentence": 8.45,
         "longest": 16,
         "longSentences": 0
@@ -164,8 +164,8 @@
       "id": "architecture",
       "baseline": {
         "words": 113,
-        "ratio": 0.79,
-        "hardWords": 24,
+        "ratio": 0.8,
+        "hardWords": 23,
         "wordsPerSentence": 23,
         "longest": 35,
         "longSentences": 1
