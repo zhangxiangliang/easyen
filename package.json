@@ -1,6 +1,6 @@
 {
   "name": "easyen",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Check how easy an English text is to read — vocabulary level and sentence length. Helps keep AI output simple. Pure TypeScript, zero runtime dependencies.",
   "author": "zhangxiangliang",
   "keywords": [

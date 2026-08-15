@@ -1,3 +1,11 @@
+## [1.2.1](https://github.com/zhangxiangliang/easyen/compare/v1.2.0...v1.2.1) (2026-08-15)
+
+
+### Bug Fixes
+
+* keep markers that sit inside a word ([e1bbb2c](https://github.com/zhangxiangliang/easyen/commit/e1bbb2c4e56b6d772f1420fe2beab45deb9f78c5))
+* stop split fragments turning into hard words ([eeb530f](https://github.com/zhangxiangliang/easyen/commit/eeb530fc0307f56129fd786f78a7c8733426867d))
+
 # [1.2.0](https://github.com/zhangxiangliang/easyen/compare/v1.1.0...v1.2.0) (2026-08-15)
 
 
