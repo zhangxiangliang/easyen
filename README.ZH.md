@@ -127,7 +127,7 @@ console.log(flow.wordsPerSentence, flow.longSentences);
 |---|---|---|
 | `everyday` | 2803 | 日常高频词。底座，单独用就是最简单的级别。 |
 | `academic` | 962 | 学术词。`--dict everyday,academic` |
-| `tech` | 243 | 软件词：api、deploy、schema…… `--dict everyday,tech` |
+| `tech` | 244 | 软件词：api、deploy、schema…… `--dict everyday,tech` |
 | `frameworks` | 803 | 工具和库名：vue、vite、docker…… `--dict everyday,tech,frameworks` |
 
 按读者选，够用就行。**词表越小，标出来要改的词越多**——这正是它的用意。别为了让分数好看就换个大词表。
@@ -172,7 +172,7 @@ npx easyen --file README.md --dict everyday,tech --markdown
 
 英文版 **`ratio` 0.94**，平均 7 词左右一句。唯一那句超过 30 词的，
 就是开头引用的那段 AI 原文——故意留着的，因为这一页讲的就是它。
-`SKILL.md` 没有这种示例，是 0.96，一个长句都没有。
+`SKILL.md` 没有这种示例，是 0.97，一个长句都没有。
 
 ## 许可
 

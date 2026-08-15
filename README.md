@@ -127,7 +127,7 @@ Useful in CI — fail the build when your docs get too hard to read.
 |---|---|---|
 | `everyday` | 2803 | Common English. The base — use it alone for the simplest level. |
 | `academic` | 962 | Academic words. `--dict everyday,academic` |
-| `tech` | 243 | Software words: api, deploy, schema … `--dict everyday,tech` |
+| `tech` | 244 | Software words: api, deploy, schema … `--dict everyday,tech` |
 | `frameworks` | 803 | Tool and library names: vue, vite, docker … `--dict everyday,tech,frameworks` |
 
 Pick only what your reader needs. **A smaller list marks more words to fix** — that is the point. Do not reach for a bigger list just to raise the score.
@@ -172,7 +172,7 @@ npx easyen --file README.md --dict everyday,tech --markdown
 
 It scores **`ratio` 0.94** at about 7 words per sentence. The one sentence over
 30 words is the AI paragraph quoted at the top — kept on purpose, since that is
-the thing this page is about. `SKILL.md`, which has no such example, scores 0.96
+the thing this page is about. `SKILL.md`, which has no such example, scores 0.97
 with no long sentence at all.
 
 ## License

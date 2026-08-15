@@ -24,8 +24,14 @@ export function splitWords(text: string): string[] {
  * Only words that mix upper and lower case are split. A plain word, an
  * all-capitals word (AWS), or a lower-case word is returned unchanged.
  * Original case is kept so callers can still judge each part.
+ *
+ * A plural acronym is one word, not two: "URLs" is a URL and an s, so it must
+ * not come apart into "UR" and "Ls" and invent a hard word.
  */
+const PLURAL_ACRONYM_RE = /^[A-Z]{2,}(?:s|es)$/;
+
 export function splitCamelCase(word: string): string[] {
+  if (PLURAL_ACRONYM_RE.test(word)) return [word];
   if (!(/[a-z]/.test(word) && /[A-Z]/.test(word))) return [word];
   return word
     .replace(/([a-z0-9])([A-Z])/g, "$1 $2") // getUser  -> get User

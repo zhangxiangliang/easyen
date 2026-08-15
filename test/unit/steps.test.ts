@@ -77,6 +77,12 @@ describe("splitCamelCase", () => {
     ["AWS", ["AWS"]], // all upper-case — unchanged
     ["Tom", ["Tom"]], // single leading capital — unchanged
     ["word", ["word"]],
+    // A plural acronym stays whole, or it invents "ls", "is" and "ds".
+    ["URLs", ["URLs"]],
+    ["APIs", ["APIs"]],
+    ["IDs", ["IDs"]],
+    ["OSes", ["OSes"]],
+    ["IDsMap", ["I", "Ds", "Map"]], // still splits when more follows
   ])("%s -> %j", (input, expected) => {
     expect(splitCamelCase(input)).toEqual(expected);
   });
@@ -183,6 +189,22 @@ describe("possibleBaseForms offers the base form", () => {
   test("always lists the word itself first (deterministic order)", () => {
     expect(possibleBaseForms("studies")[0]).toBe("studies");
     expect(possibleBaseForms("studies")).toEqual(possibleBaseForms("studies"));
+  });
+
+  describe("three-letter plurals", () => {
+    // Hyphens split "add-ons" into "add" and "ons", so the tail has to resolve.
+    test.each<[string, string]>([
+      ["ons", "on"],
+      ["ups", "up"],
+      ["ads", "ad"],
+      ["ins", "in"],
+    ])("%s -> contains %s", (word, base) => {
+      expect(possibleBaseForms(word)).toContain(base);
+    });
+
+    test.each(["ass", "ill", "add"])("%s is left alone", (word) => {
+      expect(possibleBaseForms(word)).toEqual([word]);
+    });
   });
 
   describe("un- prefix", () => {

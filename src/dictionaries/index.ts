@@ -20,7 +20,7 @@ export const BUILTIN_DICTIONARIES = {
   everyday: EVERYDAY_WORDS as readonly string[],
   /** Add-on: 962 academic words. Combine with everyday. */
   academic: ACADEMIC_WORDS as readonly string[],
-  /** Add-on: common software / technical-writing terms (api, deploy, schema ...). */
+  /** Add-on: 244 common software / technical-writing terms (api, deploy, schema ...). */
   tech: TECH_WORDS as readonly string[],
   /** Add-on: framework / library / tool names (vue, vite, webpack, docker ...). */
   frameworks: FRAMEWORK_WORDS as readonly string[],

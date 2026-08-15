@@ -75,8 +75,10 @@ function suffixBaseForms(word: string): string[] {
     out.add(word.slice(0, -2)); // boxes -> box, goes -> go
     out.add(word.slice(0, -1)); // houses -> house
   }
-  if (word.endsWith("s") && !word.endsWith("ss") && word.length > 3) {
-    out.add(word.slice(0, -1)); // cats -> cat
+  if (word.endsWith("s") && !word.endsWith("ss") && word.length > 2) {
+    // Three letters counts: hyphens split "add-ons" into "add" and "ons",
+    // and "ons" has to reach "on" or it reads as a hard word.
+    out.add(word.slice(0, -1)); // cats -> cat, ons -> on
   }
 
   // --- past tense / past participle: -ed / -ied ---
