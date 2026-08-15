@@ -34,8 +34,26 @@ function pushStemVariants(out: Set<string>, stem: string): void {
  * Return every possible base form for a lower-cased word, including the word
  * itself. The result is a de-duplicated array in a fixed, deterministic order
  * (insertion order), so look-ups always try the forms the same way.
+ *
+ * "un" is the only prefix handled. It negates without changing how hard a word
+ * is to read: if you know "changed", you know "unchanged". Suffixes like
+ * "-able" are deliberately left out — "port" is easy but "portable" is not, so
+ * that rule would hide real hard words.
  */
 export function possibleBaseForms(word: string): string[] {
+  const out = new Set<string>(suffixBaseForms(word));
+
+  // un- + a stem of 4 or more letters. The length floor keeps real words that
+  // merely start with "un" (unit, uncle, under, union) out of the rule.
+  if (word.startsWith("un") && word.length > 5) {
+    for (const form of suffixBaseForms(word.slice(2))) out.add(form);
+  }
+
+  return [...out];
+}
+
+/** Every base form reachable by undoing a suffix. No prefix rules here. */
+function suffixBaseForms(word: string): string[] {
   const out = new Set<string>();
   out.add(word);
 

@@ -45,6 +45,10 @@ describe("expandContractions", () => {
     ["I'd", "I"], // ambiguous had/would -> dropped
     ["it's", "it"], // is/possessive -> dropped
     ["child's", "child"], // possessive -> dropped
+    ["cannot", "can not"], // fused, not contracted, but same fix
+    ["Cannot", "can not"], // matching is case-insensitive
+    ["I cannot go", "I can not go"],
+    ["cannonball", "cannonball"], // \b keeps "cannot" from matching inside a word
     ["no contraction here", "no contraction here"],
   ])("%s -> %s", (input, expected) => {
     expect(expandContractions(input)).toBe(expected);
@@ -179,6 +183,26 @@ describe("possibleBaseForms offers the base form", () => {
   test("always lists the word itself first (deterministic order)", () => {
     expect(possibleBaseForms("studies")[0]).toBe("studies");
     expect(possibleBaseForms("studies")).toEqual(possibleBaseForms("studies"));
+  });
+
+  describe("un- prefix", () => {
+    test.each<[string, string]>([
+      ["unchanged", "change"], // strips the prefix and the -ed
+      ["unlike", "like"],
+      ["unusual", "usual"],
+      ["unhappy", "happy"],
+      ["unwanted", "want"],
+    ])("%s -> contains %s", (word, base) => {
+      expect(possibleBaseForms(word)).toContain(base);
+    });
+
+    // A stem under 4 letters is more likely an accident than a real prefix.
+    test.each(["unit", "uncle", "under", "union", "until", "unto"])(
+      "%s is left alone",
+      (word) => {
+        expect(possibleBaseForms(word)).not.toContain(word.slice(2));
+      }
+    );
   });
 });
 

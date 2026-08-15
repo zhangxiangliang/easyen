@@ -17,6 +17,8 @@ export function normalizeApostrophes(text: string): string {
 const CONTRACTION_RULES: ReadonlyArray<readonly [RegExp, string]> = [
   [/\bwon't\b/gi, "will not"],
   [/\bcan't\b/gi, "can not"],
+  // Not a contraction, but the same problem: one token that is two words.
+  [/\bcannot\b/gi, "can not"],
   [/\bshan't\b/gi, "shall not"],
   [/\bain't\b/gi, "be not"],
   [/n't\b/gi, " not"], // don't -> do not, isn't -> is not
