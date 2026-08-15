@@ -93,6 +93,7 @@ npx easyen --file draft.md                   # any OS, no pipe
 | `-d, --dict <spec>` | Word list to use (default: `everyday`). Comma-separated to combine. Each item is a built-in name **or** a path to your own word file: `--dict everyday,tech,./terms.txt` |
 | `-f, --file <path>` | Read the text from a file instead of stdin |
 | `-m, --markdown` | Treat the input as Markdown: drop code blocks, inline code, URLs and HTML first. **Use this on a README** — without it, badges and file paths count as hard words. |
+| `--details` | Add a row per word (base form, known or not). Off by default — see below |
 | `--proper-nouns` | Ignore unknown words that start with a capital (names, places) |
 | `--count-numbers` | Count numbers instead of ignoring them |
 | `-h, --help` | Show help |
@@ -146,10 +147,16 @@ cat draft.md | npx easyen --dict everyday,tech,./our-product-names.txt
 | `ratio` | 0 to 1 — how much of the text is in the list. Higher is easier. |
 | `hardWords` | Words not in the list, A–Z. These are the ones to change. |
 | `hardWordCounts` | The same words with counts, most first. Fix the common ones first. |
-| `details` | Every word, with its base form and whether it is known |
+| `details` | Every word, with its base form and whether it is known. **CLI: only with `--details`** |
 | `sentences.wordsPerSentence` | Average sentence length. Lower reads easier. |
 | `sentences.longest` | Words in the longest sentence |
 | `sentences.longSentences` | Sentences over 30 words. These are the ones to break up. |
+
+The CLI hides `details` unless you ask for it. On a 420-word README those rows
+are 95% of the output — roughly 14,900 tokens instead of 700 — and this tool is
+mostly read by an AI that pays for every one of them. Everything you act on is
+already in `hardWords` and `hardWordCounts`. The library always returns
+`details`; only the CLI leaves it out.
 
 ## What it does not do
 
@@ -170,7 +177,7 @@ This page eats its own dog food. Check it yourself:
 npx easyen --file README.md --dict everyday,tech --markdown
 ```
 
-It scores **`ratio` 0.94** at about 7 words per sentence. The one sentence over
+It scores **`ratio` 0.95** at about 7 words per sentence. The one sentence over
 30 words is the AI paragraph quoted at the top — kept on purpose, since that is
 the thing this page is about. `SKILL.md`, which has no such example, scores 0.97
 with no long sentence at all.

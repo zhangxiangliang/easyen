@@ -26,6 +26,7 @@ interface CliArgs {
   dict: string;
   file?: string;
   markdown: boolean;
+  details: boolean;
   options: CheckOptions;
   help: boolean;
 }
@@ -35,6 +36,7 @@ function parseArgs(argv: string[]): CliArgs {
     dict: "everyday",
     options: {},
     markdown: false,
+    details: false,
     help: false,
   };
 
@@ -55,6 +57,9 @@ function parseArgs(argv: string[]): CliArgs {
       case "-m":
       case "--markdown": // drop code, links and markup before counting
         args.markdown = true;
+        break;
+      case "--details": // per-word rows, off by default (they are 95% of the output)
+        args.details = true;
         break;
       case "--proper-nouns": // ignore likely proper nouns
         args.options.ignoreProperNouns = true;
@@ -86,6 +91,8 @@ Options:
   -m, --markdown      Treat the input as Markdown: drop code blocks, inline
                       code, URLs and HTML before counting. Use this for a
                       README, or badges and file paths count as hard words.
+  --details           Add a row per word (base form, known or not). Off by
+                      default: it is 95% of the output and you rarely need it.
   --proper-nouns      Ignore capitalised unknown words (names, places)
   --count-numbers     Count numbers instead of ignoring them
   -h, --help          Show this help
@@ -126,9 +133,23 @@ function main(): void {
       return;
     }
     const text = args.markdown ? stripMarkdown(raw) : raw;
-    const result = checkCoverage(text, resolveDictSpec(args.dict), args.options);
+    const { details, ...result } = checkCoverage(
+      text,
+      resolveDictSpec(args.dict),
+      args.options
+    );
     const sentences = checkSentences(text);
-    console.log(JSON.stringify({ ...result, sentences }, null, 2));
+
+    // `details` is one row per word — on a 420-word README that is 95% of the
+    // output, and this tool is mostly read by an AI paying for every token.
+    // Everything you act on is in hardWords and hardWordCounts.
+    console.log(
+      JSON.stringify(
+        args.details ? { ...result, details, sentences } : { ...result, sentences },
+        null,
+        2
+      )
+    );
   } catch (error) {
     console.error(error instanceof Error ? error.message : String(error));
     process.exitCode = 1;

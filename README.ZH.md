@@ -93,6 +93,7 @@ npx easyen --file draft.md                   # 任何系统，不用管道
 | `-d, --dict <spec>` | 用哪个词表（默认 `everyday`）。逗号分隔可以叠加，每一项可以是内置名字，**也可以是你自己的词表文件路径**：`--dict everyday,tech,./terms.txt` |
 | `-f, --file <path>` | 从文件读，不走 stdin |
 | `-m, --markdown` | 按 Markdown 处理：先去掉代码块、行内代码、URL 和 HTML。**量 README 一定要加这个**——不加的话，badge 和文件路径会被当成生词。 |
+| `--details` | 每个词一行明细（原形、是否认识）。默认关闭，原因见下 |
 | `--proper-nouns` | 忽略大写开头的生词（人名、地名） |
 | `--count-numbers` | 把数字也算进去（默认不算） |
 | `-h, --help` | 看帮助 |
@@ -146,10 +147,15 @@ cat draft.md | npx easyen --dict everyday,tech,./our-product-names.txt
 | `ratio` | 0 到 1，词表覆盖率。越高越好读。 |
 | `hardWords` | 不在词表里的词，按字母排。要改的就是这些。 |
 | `hardWordCounts` | 同样这些词，带出现次数，多的在前。先改高频的。 |
-| `details` | 每个词的明细：原形、是否认识 |
+| `details` | 每个词的明细：原形、是否认识。**命令行要加 `--details` 才有** |
 | `sentences.wordsPerSentence` | 平均句长，越低越好读 |
 | `sentences.longest` | 最长的句子有多少词 |
 | `sentences.longSentences` | 超过 30 词的句子。要拆的就是这些。 |
+
+命令行默认不输出 `details`。一篇 420 词的 README，这些明细占输出的 95%
+——约 14,900 tokens 对 700 tokens——而这个工具主要是给 AI 读的，每个 token
+都要花钱。真正拿来动手的东西都在 `hardWords` 和 `hardWordCounts` 里。
+库始终返回 `details`，只有命令行不打印。
 
 ## 它不做什么
 
@@ -170,7 +176,7 @@ cat draft.md | npx easyen --dict everyday,tech,./our-product-names.txt
 npx easyen --file README.md --dict everyday,tech --markdown
 ```
 
-英文版 **`ratio` 0.94**，平均 7 词左右一句。唯一那句超过 30 词的，
+英文版 **`ratio` 0.95**，平均 7 词左右一句。唯一那句超过 30 词的，
 就是开头引用的那段 AI 原文——故意留着的，因为这一页讲的就是它。
 `SKILL.md` 没有这种示例，是 0.97，一个长句都没有。
 
