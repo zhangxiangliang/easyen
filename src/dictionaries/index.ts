@@ -7,8 +7,7 @@
  * e.g. combineDictionaries("everyday", "academic") or `--dict everyday,tech`.
  * (An add-on used alone will flag function words; always pair it with everyday.)
  *
- * Each dictionary is a plain array of base-form words. See ./ATTRIBUTION.md for
- * the data sources and licences.
+ * Each dictionary is a plain array of base-form words.
  */
 import EVERYDAY_WORDS from "./everyday.json";
 import ACADEMIC_WORDS from "./academic.json";
