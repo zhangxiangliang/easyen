@@ -37,7 +37,7 @@ them.
 
 No CLI? Hand your AI this line instead, and it does the rest:
 
-> Read and follow https://github.com/zhangxiangliang/easyen/blob/main/SKILL.md
+> Read and follow https://github.com/zhangxiangliang/easyen/blob/main/skills/easy-english/SKILL.md
 
 ### On the command line
 

@@ -36,7 +36,7 @@ npx skills add zhangxiangliang/easyen
 
 不想装 CLI？把下面这句话丢给你的 AI，剩下的它自己搞定：
 
-> Read and follow https://github.com/zhangxiangliang/easyen/blob/main/SKILL.md
+> Read and follow https://github.com/zhangxiangliang/easyen/blob/main/skills/easy-english/SKILL.md
 
 ### 命令行
 

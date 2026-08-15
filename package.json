@@ -55,7 +55,7 @@
   "license": "MIT",
   "files": [
     "dist/**/*",
-    "SKILL.md"
+    "skills/**/*"
   ],
   "devDependencies": {
     "@eslint/js": "^10.0.1",
