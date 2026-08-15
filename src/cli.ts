@@ -19,10 +19,12 @@ import {
   combineDictionaries,
   stripMarkdown,
   CheckOptions,
+  CoverageResult,
   DictionarySource,
+  SentenceCheck,
 } from "./index";
 
-interface CliArgs {
+export interface CliArgs {
   dict: string;
   file?: string;
   markdown: boolean;
@@ -31,7 +33,8 @@ interface CliArgs {
   help: boolean;
 }
 
-function parseArgs(argv: string[]): CliArgs {
+/** Read the flags. Exported so the argument rules can be tested on their own. */
+export function parseArgs(argv: string[]): CliArgs {
   const args: CliArgs = {
     dict: "everyday",
     options: {},
@@ -104,7 +107,7 @@ Built-in word lists: ${listDictionaries().join(", ")}`;
  * through (so its cached Set is reused); anything else (multiple items, or a
  * file path) is read and merged into one Set.
  */
-function resolveDictSpec(spec: string): DictionarySource {
+export function resolveDictSpec(spec: string): DictionarySource {
   const builtins = new Set<string>(listDictionaries());
   const parts = spec.split(",").map((s) => s.trim()).filter(Boolean);
 
@@ -114,6 +117,23 @@ function resolveDictSpec(spec: string): DictionarySource {
     builtins.has(part) ? part : readFileSync(part, "utf8").split(/\s+/)
   );
   return combineDictionaries(...sources);
+}
+
+/**
+ * Shape what the CLI prints. Pure, so the output contract can be tested.
+ *
+ * `details` is one row per word — on a 420-word README that is 96% of the
+ * output, and this tool is mostly read by an AI paying for every token.
+ * Everything you act on is already in hardWords and hardWordCounts, so the
+ * rows only appear when asked for.
+ */
+export function buildReport(
+  coverage: CoverageResult,
+  sentences: SentenceCheck,
+  showDetails: boolean
+): Record<string, unknown> {
+  const { details, ...rest } = coverage;
+  return showDetails ? { ...rest, details, sentences } : { ...rest, sentences };
 }
 
 function main(): void {
@@ -133,23 +153,9 @@ function main(): void {
       return;
     }
     const text = args.markdown ? stripMarkdown(raw) : raw;
-    const { details, ...result } = checkCoverage(
-      text,
-      resolveDictSpec(args.dict),
-      args.options
-    );
+    const coverage = checkCoverage(text, resolveDictSpec(args.dict), args.options);
     const sentences = checkSentences(text);
-
-    // `details` is one row per word — on a 420-word README that is 95% of the
-    // output, and this tool is mostly read by an AI paying for every token.
-    // Everything you act on is in hardWords and hardWordCounts.
-    console.log(
-      JSON.stringify(
-        args.details ? { ...result, details, sentences } : { ...result, sentences },
-        null,
-        2
-      )
-    );
+    console.log(JSON.stringify(buildReport(coverage, sentences, args.details), null, 2));
   } catch (error) {
     console.error(error instanceof Error ? error.message : String(error));
     process.exitCode = 1;
@@ -164,4 +170,5 @@ function readStdin(): string {
   }
 }
 
-main();
+// Only run when invoked as a command, so tests can import this file.
+if (require.main === module) main();

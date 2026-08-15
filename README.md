@@ -168,7 +168,7 @@ already in `hardWords` and `hardWordCounts`. The library always returns
 ## Design
 
 * **Measure, do not judge.** Two numbers and two lists. No 50-page book of rules, no style opinions.
-* **Zero runtime dependencies.** Pure TypeScript. 179 tests, 99% coverage.
+* **Zero runtime dependencies.** Pure TypeScript. 221 tests, 92% coverage.
 * **Small pure functions.** Every step is exported, so you can build your own pipeline.
 
 This page eats its own dog food. Check it yourself:
