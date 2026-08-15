@@ -49,8 +49,10 @@ export function stripMarkdown(text: string): string {
       .replace(/^[ \t]*#{1,6}[ \t]+/gm, "")
       .replace(/^[ \t]*>[ \t]?/gm, "")
       .replace(/^[ \t]*(?:[-*+]|\d+[.)])[ \t]+/gm, "")
-      // Emphasis and strikethrough markers
-      .replace(/(\*\*|__|~~|[*_])/g, "")
+      // Emphasis and strikethrough markers, but only at a word edge. Stripping
+      // them everywhere turned "max_retry_count" into "maxretrycount" — a hard
+      // word that was never in the text.
+      .replace(/(?<![A-Za-z0-9])[*_~]+|[*_~]+(?![A-Za-z0-9])/g, "")
       // Footnote markers
       .replace(/\[\^[^\]]*\]/g, " ")
       // Collapse the holes we just made

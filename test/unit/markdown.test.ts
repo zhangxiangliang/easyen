@@ -51,6 +51,25 @@ test("frontmatter is dropped, the body is not", () => {
 
 test("emphasis markers go without splitting the word", () => {
   expect(stripMarkdown("**word**")).toBe("word");
+  expect(stripMarkdown("_quiet_ and ~~gone~~")).toBe("quiet and gone");
+});
+
+// A marker inside a word is part of the word, not markup. Removing it would
+// invent a hard word ("maxretrycount") that nobody wrote.
+test.each([
+  "Set the max_retry_count value.",
+  "Read snake_case names in this file.",
+  "The value is 5 - 3 today.",
+  "A well-known problem happens a lot.",
+])("prose is left alone: %s", (prose) => {
+  expect(stripMarkdown(prose)).toBe(prose);
+});
+
+// A marker at a word edge is markup, and Markdown itself reads it that way:
+// __dunder__ renders as bold. Write it in backticks to keep it whole.
+test("a word wrapped in markers is treated as markup", () => {
+  expect(stripMarkdown("Read __dunder__ names.")).toBe("Read dunder names.");
+  expect(stripMarkdown("Read `__dunder__` names.")).toBe("Read names.");
 });
 
 test("a README-shaped sample loses the noise, not the prose", () => {
