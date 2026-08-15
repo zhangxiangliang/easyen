@@ -1,3 +1,10 @@
+## [2.0.2](https://github.com/zhangxiangliang/easyen/compare/v2.0.1...v2.0.2) (2026-08-15)
+
+
+### Bug Fixes
+
+* move the skill into its own directory ([0835503](https://github.com/zhangxiangliang/easyen/commit/0835503d8f21871304c6f496259866be75a54a92))
+
 ## [2.0.1](https://github.com/zhangxiangliang/easyen/compare/v2.0.0...v2.0.1) (2026-08-15)
 
 
